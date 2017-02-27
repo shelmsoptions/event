@@ -11,7 +11,8 @@
   <body>
     <% if session[:user_id] %>
       <p>
-        Hello, <%= User.find(session[:user_id]).first_name %> <%= User.find(session[:user_id]).last_name %>
+        Hello, <%= User.find(session[:user_id]).first_name %> <%= User.find(session[:user_id]).last_name %> |
+        <a href="/users/<%= current_user.id %>/edit">Edit Profile</a> |
         <a href="/sessions/<%= session[:user_id] %>" data-method="delete">Logout</a>
       </p>
       __________________________

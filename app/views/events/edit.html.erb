@@ -5,7 +5,7 @@
     Event Name: <%= f.text_field :name %><br />
   </p>
   <p>
-    Location: <%= f.text_field :location %> State: <%= f.select :location_state, Event::STATES.keys, {include_blank: "-- Select --"} %><br />
+    Location: <%= f.text_field :location %> State: <%= f.select :location_state, Event::STATES.keys, {include_blank: "-- Select --"} %>
   </p>
   <p>
     Event Date: <%= f.datetime_select :date %><br />
