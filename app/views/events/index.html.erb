@@ -2,7 +2,35 @@
 <h3>Hello <%= @user.first_name %> from <%= @user.location_state %></h3>
 
 <h4>Here are some of the events in your state:</h4>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>State</th>
+    <th>Host</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @events_by_state.each do |event_by_location|  %>
+    <tr>
+      <td><%= event_by_location.name %></td>
+      <td><%= event_by_location.date %></td>
+      <td><%= event_by_location.location %></td>
+      <td><%= event_by_location.location_state %></td>
+      <td><%= event_by_location.user.first_name %> <%= event_by_location.user.last_name %></td>
+      <td>
+        <% if event_by_location.user == current_user %>
+          <a href="/events/<%= event_by_location.id %>/edit">Edit</a>
+          <%= link_to 'Delete', event_by_location, method: :delete, data: {confirm: 'Are you certain'} %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
+<h4>Here are all events:</h4>
 <table>
   <thead>
     <th>Name</th>
@@ -22,7 +50,7 @@
       <td><%= event.user.first_name %> <%= event.user.last_name %></td>
       <td>
         <% if event.user == current_user %>
-          <a href="/events/<%= event.id %>/edit">Edit</a>
+          <a href="/events/<%= event.id %>/edit">Edit</a> |
           <%= link_to 'Delete', event, method: :delete, data: {confirm: 'Are you certain'} %>
         <% end %>
       </td>

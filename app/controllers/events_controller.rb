@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all
+    @events_by_state = Event.where :location_state => current_user.location_state
+    puts 'location_state query:', @events_by_state
     @user = current_user
     @event = Event.new
   end
