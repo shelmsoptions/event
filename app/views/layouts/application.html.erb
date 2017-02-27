@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Events</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if session[:user_id] %>
+      <p>
+        Hello, <%= User.find(session[:user_id]).first_name %> <%= User.find(session[:user_id]).last_name %>
+        <a href="/sessions/<%= session[:user_id] %>" data-method="delete">Logout</a>
+      </p>
+      __________________________
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

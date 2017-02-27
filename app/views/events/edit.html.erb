@@ -1,0 +1,17 @@
+<h1>Edit Event: <%= @event.name %></h1>
+<%= form_for @event, :url => { :action => "update"}, method: :patch do |f| %>
+  <%= f.hidden_field :user_id, value: session[:user_id] %>
+  <p>
+    Event Name: <%= f.text_field :name %><br />
+  </p>
+  <p>
+    Location: <%= f.text_field :location %> State: <%= f.select :location_state, Event::STATES.keys, {include_blank: "-- Select --"} %><br />
+  </p>
+  <p>
+    Event Date: <%= f.datetime_select :date %><br />
+  </p>
+  <p>
+    <%= f.submit "Update Event" %>
+  </p>
+  <a href="/events#index">back</a>
+<% end %>

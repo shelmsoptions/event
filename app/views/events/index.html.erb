@@ -1,0 +1,58 @@
+<h1>Events</h1>
+<h3>Hello <%= @user.first_name %> from <%= @user.location_state %></h3>
+
+<h4>Here are some of the events in your state:</h4>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>State</th>
+    <th>Host</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @events.each do |event|  %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.date %></td>
+      <td><%= event.location %></td>
+      <td><%= event.location_state %></td>
+      <td><%= event.user.first_name %> <%= event.user.last_name %></td>
+      <td>
+        <% if event.user == current_user %>
+          <a href="/events/<%= event.id %>/edit">Edit</a>
+          <%= link_to 'Delete', event, method: :delete, data: {confirm: 'Are you certain'} %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>Other events go here</p>
+<h3>Post a new Event!</h3>
+
+<% flash.each do |key, value| %>
+  <%= content_tag :p, value %>
+<% end %>
+
+<%= form_for @event, :url => { :action => "create"} do |f| %>
+  <%= f.hidden_field :user_id, value: session[:user_id] %>
+  <p>
+    Event Name: <%= f.text_field :name %><br />
+  </p>
+  <p>
+    location: <%= f.text_field :location %><br />
+  </p>
+  <p>
+    State: <%= f.select :location_state, Event::STATES.keys, {include_blank: "-- Select --"} %><br />
+  </p>
+  <p>
+    Date: <%= f.datetime_select :date %><br />
+  </p>
+  <%= f.submit "Add Event" %>
+<% end %>
+
+
