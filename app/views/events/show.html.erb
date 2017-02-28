@@ -1,2 +1,30 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h1><%= @event.name %></h1>
+<p>
+  Event Host: <%= @event.user.first_name %> <%= @event.user.last_name %>
+</p>
+<p>
+  Event Date: <%= @event.date.strftime("%b %d, %Y - %l:%M%p") %>
+</p>
+
+<p>
+  Event Location: <%= @event.location %>, <%= @event.location_state %>
+</p>
+<p>
+  # of attendees: <%= @event.users_joined.count %>
+</p>
+<a href="/events#index">back</a>
+<h4>Members of this event:</h4>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>State</th>
+  </thead>
+  <tbody>
+    <% @users_joined.each do |u| %>
+    <tr>
+      <td><%= u.first_name %> <%= u.last_name %></td>
+      <td><%= u.location_state %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

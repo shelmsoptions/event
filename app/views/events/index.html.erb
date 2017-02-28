@@ -14,8 +14,8 @@
   <tbody>
     <% @events_by_state.each do |event_by_location|  %>
     <tr>
-      <td><%= event_by_location.name %></td>
-      <td><%= event_by_location.date %></td>
+      <td><%= link_to "#{event_by_location.name}", event_path(event_by_location.id) %></td>
+      <td><%= event_by_location.date.strftime("%b %d, %Y - %l:%M%p") %></td>
       <td><%= event_by_location.location %></td>
       <td><%= event_by_location.location_state %></td>
       <td><%= event_by_location.user.first_name %> <%= event_by_location.user.last_name %></td>
@@ -49,8 +49,8 @@
   <tbody>
     <% @events.each do |event|  %>
     <tr>
-      <td><%= event.name %></td>
-      <td><%= event.date %></td>
+      <td><%= link_to "#{event.name}", event_path(event.id) %></td>
+      <td><%= event.date.strftime("%b %d, %Y - %l:%M%p") %></td>
       <td><%= event.location %></td>
       <td><%= event.location_state %></td>
       <td><%= event.user.first_name %> <%= event.user.last_name %></td>

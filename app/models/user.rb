@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :events
   has_many :joins
-  has_many :events_joined, through: :joins, source: :events
+  has_many :events_joined, through: :joins, source: :event
   has_many :discussions
   has_many :events_discussed, through: :discussions, source: :event
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i

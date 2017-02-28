@@ -36,6 +36,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
+    @users_joined = @event.users_joined
+    # redirect_to event_path
   end
 
   def destroy
