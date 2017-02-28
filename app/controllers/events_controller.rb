@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     puts 'location_state query:', @events_by_state
     @user = current_user
     @event = Event.new
+    @join = Join.all
   end
 
   def new

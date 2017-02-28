@@ -23,6 +23,12 @@
         <% if event_by_location.user == current_user %>
           <a href="/events/<%= event_by_location.id %>/edit">Edit</a>
           <%= link_to 'Delete', event_by_location, method: :delete, data: {confirm: 'Are you certain'} %>
+        <% elsif event_by_location.joins.where(user_id:session[:user_id], event_id:event_by_location.id) != [] %>
+
+          <%= link_to "Cancel", joins_path(user_id: session[:user_id], event_id: event_by_location.id), method: :delete %>
+
+        <% else %>
+          <%= link_to 'Join', joins_path(user_id: session[:user_id], event_id: event_by_location.id), method: :post %>
         <% end %>
       </td>
     </tr>
