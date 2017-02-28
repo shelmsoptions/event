@@ -38,6 +38,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @users_joined = @event.users_joined
+    @discussion = Discussion.new
     # redirect_to event_path
   end
 

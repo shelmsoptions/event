@@ -28,3 +28,11 @@
     <% end %>
   </tbody>
 </table>
+
+<%= form_for @discussion, :url => { :action => "create"} do |f| %>
+  <%= f.hidden_field :user_id, value: session[:user_id] %>
+  <p>
+    Comment: <%= f.text_field :comment %><br />
+  </p>
+  <%= f.submit "Submit Comment" %>
+<% end %>
