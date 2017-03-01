@@ -81,7 +81,7 @@
     location: <%= f.text_field :location %><br />
   </p>
   <p>
-    State: <%= f.select :location_state, Event::STATES.keys, {include_blank: "-- Select --"} %><br />
+    State: <%= f.select :location_state, Events::Application::STATES.keys, {include_blank: "-- Select --"} %><br />
   </p>
   <p>
     Date: <%= f.datetime_select :date %><br />
