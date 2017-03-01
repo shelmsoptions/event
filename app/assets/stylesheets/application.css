@@ -42,3 +42,14 @@ table, th, td{
   border-collapse: collapse;
   padding: 3px;
 }
+textarea{
+  width: 200px;
+  height: 75px;
+}
+.discussion{
+  width: 340px;
+  height: 340px;
+  border: 1px solid #666;
+  overflow: scroll;
+  padding: 5px;
+}

@@ -29,10 +29,24 @@
   </tbody>
 </table>
 
-<%= form_for @discussion, :url => { :action => "create"} do |f| %>
-  <%= f.hidden_field :user_id, value: session[:user_id] %>
+<h4>Join the Discussion!</h4>
+<%= form_for @discussion, :url => url_for(:controller => 'discussions', :action => "create") do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :event_id, value: @event.id %>
   <p>
-    Comment: <%= f.text_field :comment %><br />
+    <%= f.label :comment %>
+    <%= f.text_area :comment %><br />
   </p>
   <%= f.submit "Submit Comment" %>
 <% end %>
+
+<h4>Event Discussion</h4>
+<div class="discussion">
+  <% @discussions.each do |discussion| %>
+    <p>
+        <%= discussion.user.first_name %> <%= discussion.user.last_name %> says: <%= discussion.comment %>
+    </p>
+    _________________________________
+  <% end %>
+</div>
+

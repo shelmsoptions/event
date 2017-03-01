@@ -2,14 +2,13 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @events_by_state = Event.where :location_state => current_user.location_state
-    puts 'location_state query:', @events_by_state
+    # puts 'location_state query:', @events_by_state
     @user = current_user
     @event = Event.new
     @join = Join.all
   end
 
   def new
-
   end
 
   def create
@@ -39,6 +38,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @users_joined = @event.users_joined
     @discussion = Discussion.new
+    @discussions = Discussion.where(event:@event.id)
     # redirect_to event_path
   end
 
@@ -49,6 +49,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:name, :location, :location_state, :date, :user_id)
+    params.permit(:name, :location, :location_state, :date, :user_id)
   end
 end
