@@ -24,9 +24,8 @@
           <a href="/events/<%= event_by_location.id %>/edit">Edit</a>
           <%= link_to 'Delete', event_by_location, method: :delete, data: {confirm: 'Are you certain'} %>
         <% elsif event_by_location.joins.where(user_id:session[:user_id], event_id:event_by_location.id) != [] %>
-          Joining
+          Joined
           <%= link_to "Cancel", joins_path(user_id: session[:user_id], event_id: event_by_location.id), method: :delete %>
-
         <% else %>
           <%= link_to 'Join', joins_path(user_id: session[:user_id], event_id: event_by_location.id), method: :post %>
         <% end %>
@@ -56,8 +55,13 @@
       <td><%= event.user.first_name %> <%= event.user.last_name %></td>
       <td>
         <% if event.user == current_user %>
-          <a href="/events/<%= event.id %>/edit">Edit</a> |
+          <a href="/events/<%= event.id %>/edit">Edit</a>
           <%= link_to 'Delete', event, method: :delete, data: {confirm: 'Are you certain'} %>
+        <% elsif event.joins.where(user_id:session[:user_id], event_id:event.id) != [] %>
+          Joined
+          <%= link_to "Cancel", joins_path(user_id: session[:user_id], event_id: event.id), method: :delete %>
+        <% else %>
+          <%= link_to 'Join', joins_path(user_id: session[:user_id], event_id: event.id), method: :post %>
         <% end %>
       </td>
     </tr>
