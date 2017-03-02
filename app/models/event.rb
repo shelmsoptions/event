@@ -8,7 +8,7 @@ class Event < ApplicationRecord
 
   def date_must_be_post_current
     if date.present? && date < Date.today
-      errors.add(:date, "Date must be later than today!!")
+      errors.add(:date, "must be later than today!!")
     end
   end
 

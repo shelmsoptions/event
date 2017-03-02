@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @events_by_state = Event.where :location_state => current_user.location_state
-    # puts 'location_state query:', @events_by_state
     @user = current_user
     @event = Event.new
     @join = Join.all
@@ -13,12 +12,8 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new( event_params )
-    if @event.save
-      redirect_to events_path
-    else
-      flash[:errors] = @event.errors.full_messages
-      redirect_to events_path
-    end
+    flash[:errors] = @event.errors.full_messages unless @event.save
+    redirect_to events_path
   end
 
   def edit
@@ -39,7 +34,6 @@ class EventsController < ApplicationController
     @users_joined = @event.users_joined
     @discussion = Discussion.new
     @discussions = Discussion.where(event:@event.id)
-    # redirect_to event_path
   end
 
   def destroy
