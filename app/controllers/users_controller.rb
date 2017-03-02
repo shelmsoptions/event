@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.save
       session[:user_id] = @user.id
-      puts session[:user_id]
+      # puts session[:user_id]
       redirect_to events_path
     else
       flash[:errors] = @user.errors.full_messages
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:first_name, :last_name, :email, :location, :location_state, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :location, :location_state, :password, :password_confirmation)
   end
   def user_edit_params
     params.require(:user).permit(:first_name, :last_name, :email, :location, :location_state)
