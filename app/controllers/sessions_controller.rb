@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
 
   def index
     @users = User.new
-    # @session = Session.new
   end
 
   def create
